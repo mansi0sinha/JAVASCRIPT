@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Bat Ball Stump Game</h1>
+    <button onclick="BatChoosen()">Bat</button>
+    <button onclick="BallChoosen()">Ball</button>
+    <button onclick="StumpChoosen()">Stump</button>
+    <p id="choose"></p>
+    <script>
+
+        function randomNumber() {
+            let randomNo = Math.random() * 3;
+            let cmp;
+            if (randomNo >= 0 && randomNo < 1) {
+                return 'Bat';
+            }
+            else if (randomNo >= 1 && randomNo < 2) {
+                return 'Ball';
+            }
+            else {
+                return 'Stump';
+            }
+        }
+        function BatChoosen() {
+            let cmpChoice = randomNumber();
+            if (cmpChoice === 'Ball') {
+                result = "You won.";
+            }
+            else if (cmpChoice == 'Bat') {
+                result = "Its a tie";
+            }
+            else {
+                result = "Computer won";
+            }
+            document.querySelector('#choose').innerText = `Your choice is Bat computer choice is ${cmpChoice}. ${result}`;
+        }
+ function BallChoosen() {
+            let cmpChoice = randomNumber();
+            if (cmpChoice === 'Stump') {
+                result = "You won.";
+            }
+            else if (cmpChoice == 'Ball') {
+                result = "Its a tie";
+            }
+            else {
+                result = "Computer won";
+            }
+            document.querySelector('#choose').innerText = `Your choice is Ball computer choice is ${cmpChoice}. ${result}`;
+        }
+function StumpChoosen() {
+            let cmpChoice = randomNumber();
+            if (cmpChoice === 'Bat') {
+                result = "You won.";
+            }
+            else if (cmpChoice == 'Stump') {
+                result = "Its a tie";
+            }
+            else {
+                result = "Computer won";
+            }
+            document.querySelector('#choose').innerText = `Your choice is Stump computer choice is ${cmpChoice}. ${result}`;
+        }
+
+    </script>
+</body>
+
+</html>
