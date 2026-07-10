@@ -9,16 +9,40 @@
 
 <body>
     <h1>Bat Ball Stump Game</h1>
-    <button onclick="BatChoosen()">Bat</button>
-    <button onclick="BallChoosen()">Ball</button>
-    <button onclick="StumpChoosen()">Stump</button>
+    <button onclick="Choosen('Bat')">Bat</button>
+    <button onclick="Choosen('Ball')">Ball</button>
+    <button onclick="Choosen('Stump')">Stump</button>
+    <button onclick="reset()">Reset</button>
     <p id="choose"></p>
     <script>
+        let score;
+        let scoreStr = localStorage.getItem('Score');
+        resetScore(scoreStr);
 
+        function resetScore(scoreStr) {
+            score = JSON.parse(scoreStr) || {
+                win: 0,
+                loss: 0,
+                tie: 0
+
+            }
+            score.displayScore = function () {
+                return `No of matches won:${score.win} ,Lost: ${score.loss} and Tie: ${score.tie}`;
+
+            }
+        }
+        function reset() {
+            localStorage.clear();
+            resetScore(scoreStr);
+            setValue();
+            document.querySelector('#choose').innerText = `${score.displayScore()}`;
+
+        }
         function randomNumber() {
             let randomNo = Math.random() * 3;
             let cmp;
             if (randomNo >= 0 && randomNo < 1) {
+
                 return 'Bat';
             }
             else if (randomNo >= 1 && randomNo < 2) {
@@ -28,46 +52,58 @@
                 return 'Stump';
             }
         }
-        function BatChoosen() {
+        function Choosen(yourChoice) {
             let cmpChoice = randomNumber();
-            if (cmpChoice === 'Ball') {
-                result = "You won.";
+            if (yourChoice == 'Bat') {
+                if (cmpChoice === 'Ball') {
+                    score.win++;
+                    result = "You won.";
+                }
+                else if (cmpChoice == 'Bat') {
+                    score.tie++;
+                    result = "Its a tie";
+                }
+                else {
+                    score.loss++;
+                    result = "Computer won";
+                }
             }
-            else if (cmpChoice == 'Bat') {
-                result = "Its a tie";
+            else if (yourChoice == 'Ball') {
+                if (cmpChoice === 'Stump') {
+                    score.win++;
+                    result = "You won.";
+                }
+                else if (cmpChoice == 'Ball') {
+                    score.tie++;
+                    result = "Its a tie";
+                }
+                else {
+                    score.loss++;
+                    result = "Computer won";
+                }
+            } else {
+                if (cmpChoice === 'Bat') {
+                    score.win++;
+                    result = "You won.";
+                }
+                else if (cmpChoice == 'Stump') {
+                    score.tie++;
+                    result = "Its a tie";
+                }
+                else {
+                    score.loss++;
+                    result = "Computer won";
+                }
             }
-            else {
-                result = "Computer won";
-            }
-            document.querySelector('#choose').innerText = `Your choice is Bat computer choice is ${cmpChoice}. ${result}`;
+            printResult(yourChoice, cmpChoice, result);
         }
- function BallChoosen() {
-            let cmpChoice = randomNumber();
-            if (cmpChoice === 'Stump') {
-                result = "You won.";
-            }
-            else if (cmpChoice == 'Ball') {
-                result = "Its a tie";
-            }
-            else {
-                result = "Computer won";
-            }
-            document.querySelector('#choose').innerText = `Your choice is Ball computer choice is ${cmpChoice}. ${result}`;
+        function setValue() {
+            localStorage.setItem('Score', JSON.stringify(score));
         }
-function StumpChoosen() {
-            let cmpChoice = randomNumber();
-            if (cmpChoice === 'Bat') {
-                result = "You won.";
-            }
-            else if (cmpChoice == 'Stump') {
-                result = "Its a tie";
-            }
-            else {
-                result = "Computer won";
-            }
-            document.querySelector('#choose').innerText = `Your choice is Stump computer choice is ${cmpChoice}. ${result}`;
+        function printResult(yourChoice, cmpChoice, result) {
+            setValue();
+            document.querySelector('#choose').innerText = `Your choice is ${yourChoice} computer choice is ${cmpChoice}. ${result}. ${score.displayScore()}`;
         }
-
     </script>
 </body>
 
