@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+    <style>
+        .js-odd {
+            background-color: blue;
+        }
+
+        .js-even {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="inputClass">
+        <label for="input">Enter Name</label>
+        <input type="text" id="input">
+        <button type="submit" id="btn">Submit</button>
+    </div>
+    <h3 id="greeting"></h3>
+    <button id="my-btn">0</button>
+    <script>
+        let inputValue = document.querySelector('#input');
+        let button = document.querySelector('#btn');
+        let inputClass = document.querySelector('.inputClass');
+        button.addEventListener("click", function () {
+            inputClass.style.display = "none";
+            doGreeting(inputValue.value);
+        });
+        function doGreeting(personName = "Default") {
+            let date = new Date();
+            let hours = date.getHours();
+            let heading = document.querySelector('#greeting');
+            if (hours > 5 && hours < 12) {
+                heading.innerText = ` ${personName} Good Morning`;
+            }
+            else if (hours >= 12 && hours < 18) {
+                heading.innerText = ` ${personName} Good Afternoon`;
+            }
+            else {
+                heading.innerText = ` ${personName} Good Night`;
+            }
+        }
+        let mybtn = document.querySelector('#my-btn');
+        let noTimesClicked = JSON.parse(localStorage.getItem("clicked")) || 0;
+        showColor(noTimesClicked);
+
+        mybtn.innerText = noTimesClicked;
+        mybtn.addEventListener("click", function () {
+            noTimesClicked++;
+            showColor(noTimesClicked);
+            mybtn.classList
+            mybtn.innerText = noTimesClicked;
+            localStorage.setItem("clicked", JSON.stringify(noTimesClicked));
+        });
+        function showColor(num) {
+            if (num % 2 == 0) {
+                mybtn.classList.remove('js-odd');
+                mybtn.classList.add('js-even');
+            }
+            else {
+                mybtn.classList.remove('js-even');
+                mybtn.classList.add('js-odd');
+            }
+        }
+    </script>
+</body>
+
+</html>
