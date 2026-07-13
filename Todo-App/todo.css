@@ -1,0 +1,41 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+#main-heading{
+    text-align: center;
+}
+ .grid-container{
+    display: grid;
+    grid-template-columns: 200px 150px 100px;
+    column-gap: 10px;
+    row-gap: 10px;
+    margin-top: 15px;
+    align-items: center;
+}
+.input
+{
+    font-size: 15px;
+    padding: 7px 5px;
+}
+#dlt_btn{
+    background-color: rgb(185, 17, 17);
+    color: white;
+    border: none;
+    border-radius:10px ;
+    padding: 10px 0px;
+    cursor: pointer;
+    
+}
+#add_btn{
+     background-color: rgb(24, 206, 106);
+    color: white;
+    border: none;
+    border-radius:10px ;
+    padding: 10px 0px;
+    cursor: pointer;
+}
+#add_btn.active{
+
+    transform: scale(0.95);
+}
