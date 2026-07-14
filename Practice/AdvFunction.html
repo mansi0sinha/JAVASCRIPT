@@ -13,7 +13,7 @@
             background-color: rgb(178, 37, 37);
             color: white;
             border: none;
-            border-radius: 4px;
+           
         }
 
         .size-double {
@@ -37,9 +37,9 @@
         let multiply = (num1, num2) => (num1 * num2);
         console.log(multiply(9, 9));
         let printGreeting = () => console.log("Namaste");
-        let runTwice = inputFun => {
-            inputFun();
-            inputFun();
+        let runTwice = inputFunction => {
+            inputFunction();
+            inputFunction();
         };
         console.log(runTwice(printGreeting));
         let arr = [1, 2, 3, 4, 5, 6, 7, 9, 0, 7, 5, 4];
